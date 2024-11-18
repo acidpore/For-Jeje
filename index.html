@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Happy Birthday!</title>
+    <style type="text/css">
+      @font-face {
+        font-family: digit;
+        src: url("digital-7_mono.ttf") format("truetype");
+      }
+    </style>
+    <link href="css/style.css" type="text/css" rel="stylesheet" />
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/garden.js"></script>
+    <script type="text/javascript" src="js/functions.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1>Love Letter For Jeje</h1>
+    </header>
+    <div id="mainDiv">
+      <div id="content">
+        <div id="loveHeart">
+          <canvas id="garden"></canvas>
+          <div id="words">
+            <div id="messages">
+              Happy Sweet Seventeen Jession!
+              <div id="elapseClock"></div>
+            </div>
+            <div id="tapMe" onclick="showPageModal()">Tap Me!</div>
+            <div id="loveu">
+              Love u forever and ever.<br />
+              <div class="signature">- ferdinand</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="copyright">
+        Inspired by
+        <a href="http://love.hackerzhou.me/">our love story</a>
+        project.<br />
+        Copyright © 2024
+        <a href="https://github.com/acidpore">acidpore</a>
+      </div>
+    </div>
+
+    <!-- Foto di sebelah kiri -->
+    <div
+      class="photo heart"
+      style="top: 40px; left: 120px"
+      onclick="showModal('assets/aset1.jpeg', 'Deskripsi untuk Foto 1')"
+    >
+      <img src="assets/aset1.jpeg" alt="Foto 1" />
+    </div>
+    <div
+      class="photo star"
+      style="top: 120px; left: 280px"
+      onclick="showModal('assets/aset1.jpeg')"
+    >
+      <img src="assets/aset1.jpeg" alt="Foto 2" />
+    </div>
+    <div
+      class="photo circle"
+      style="top: 250px; left: 160px"
+      onclick="showModal('assets/aset1.jpeg')"
+    >
+      <img src="assets/aset1.jpeg" alt="Foto 3" />
+    </div>
+    <div
+      class="photo triangle"
+      style="top: 400px; left: 280px"
+      onclick="showModal('assets/aset1.jpeg')"
+    >
+      <img src="assets/aset1.jpeg" alt="Foto 4" />
+    </div>
+    <div
+      class="photo diamond"
+      style="top: 470px; left: 125px"
+      onclick="showModal('assets/aset1.jpeg')"
+    >
+      <img src="assets/aset1.jpeg" alt="Foto 5" />
+    </div>
+
+    <!-- Foto di sebelah kanan -->
+    <div
+      class="photo diamond"
+      style="top: 60px; right: 120px"
+      onclick="showModal('assets/aset1.jpeg')"
+    >
+      <img src="assets/aset1.jpeg" alt="Foto 6" />
+    </div>
+    <div
+      class="photo circle"
+      style="top: 180px; right: 250px"
+      onclick="showModal('assets/aset1.jpeg')"
+    >
+      <img src="assets/aset1.jpeg" alt="Foto 7" />
+    </div>
+    <div
+      class="photo triangle"
+      style="top: 300px; right: 120px"
+      onclick="showModal('assets/aset1.jpeg')"
+    >
+      <img src="assets/aset1.jpeg" alt="Foto 8" />
+    </div>
+    <div
+      class="photo star"
+      style="top: 380px; right: 280px"
+      onclick="showModal('assets/aset1.jpeg')"
+    >
+      <img src="assets/aset1.jpeg" alt="Foto 9" />
+    </div>
+    <div
+      class="photo heart"
+      style="top: 480px; right: 140px"
+      onclick="showModal('assets/aset1.jpeg')"
+    >
+      <img src="assets/aset1.jpeg" alt="Foto 10" />
+    </div>
+
+    <!-- Modal untuk menampilkan gambar dan teks deskripsi -->
+    <div id="imageModal" class="modal" onclick="closeModal()">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <div class="modal-content-wrapper">
+        <img class="modal-content" id="fullImage" />
+        <div class="caption" id="captionText"></div>
+      </div>
+    </div>
+
+    <!-- Modal untuk halaman popup -->
+    <div id="pageModal" onclick="closePageModal(event)">
+      <div id="pageModalContent">
+        <span class="modalCloseBtn" onclick="closePageModal(event)"
+          >&times;</span
+        >
+        <h2>Selamat Ulang Tahun!</h2>
+        <p>
+          Semoga hari ulang tahunmu penuh dengan cinta dan kebahagiaan. Ini
+          adalah hari spesialmu, dan aku berharap semua impianmu menjadi
+          kenyataan!
+        </p>
+      </div>
+    </div>
+
+    <script type="text/javascript">
+      var offsetX = $("#loveHeart").width() / 2;
+      var offsetY = $("#loveHeart").height() / 2 - 55;
+      var together = new Date();
+      together.setFullYear(2023, 4, 27);
+      together.setHours(0);
+      together.setMinutes(0);
+      together.setSeconds(0);
+      together.setMilliseconds(0);
+
+      if (!document.createElement("canvas").getContext) {
+        var msg = document.createElement("div");
+        msg.id = "errorMsg";
+        msg.innerHTML =
+          "Your browser doesn't support HTML5!<br/>Recommend use Chrome 14+/IE 9+/Firefox 7+/Safari 4+";
+        document.body.appendChild(msg);
+        $("#code").css("display", "none");
+        $("#copyright").css("position", "absolute");
+        $("#copyright").css("bottom", "10px");
+        document.execCommand("stop");
+      } else {
+        setTimeout(function () {
+          startHeartAnimation();
+        }, 5000);
+
+        timeElapse(together);
+        setInterval(function () {
+          timeElapse(together);
+        }, 500);
+
+        adjustCodePosition();
+        $("#code").typewriter();
+      }
+
+      function showModal(src, caption) {
+        document.getElementById("imageModal").style.display = "flex";
+        document.getElementById("fullImage").src = src;
+        document.getElementById("captionText").innerText = caption;
+      }
+
+      function closeModal() {
+        document.getElementById("imageModal").style.display = "none";
+      }
+
+      $(document).ready(function () {
+        $("#messages").typewriter();
+
+        setTimeout(function () {
+          $("#tapMe").fadeIn();
+        }, 5000);
+      });
+
+      function showPageModal() {
+        document.getElementById("pageModal").style.display = "flex";
+      }
+
+      function closePageModal(event) {
+        if (
+          event.target === document.getElementById("pageModal") ||
+          event.target.classList.contains("modalCloseBtn")
+        ) {
+          document.getElementById("pageModal").style.display = "none";
+        }
+      }
+
+      const colors = [
+        "#FF0000", // merah
+        "#FF7F00", // jingga
+        "#FFFF00", // kuning
+        "#00FF00", // hijau
+        "#0000FF", // biru
+        "#4B0082", // nila
+        "#8B00FF", // ungu
+      ];
+
+      // Fungsi untuk membuat kembang api kecil dengan warna acak
+      function createFirework() {
+        const firework = document.createElement("div");
+        firework.classList.add("firework");
+
+        const x = Math.random() * window.innerWidth;
+        const y = Math.random() * window.innerHeight;
+
+        const randomColor = colors[Math.floor(Math.random() * colors.length)];
+        firework.style.backgroundColor = randomColor;
+
+        firework.style.left = `${x}px`;
+        firework.style.top = `${y}px`;
+
+        document.body.appendChild(firework);
+
+        setTimeout(() => {
+          firework.remove();
+        }, 1000);
+      }
+
+      setInterval(createFirework, 500);
+    </script>
+  </body>
+</html>
