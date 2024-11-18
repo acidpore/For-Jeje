@@ -368,6 +368,38 @@ header h1 {
     align-items: center;
   }
 
+  @media (max-width: 600px) {
+    body {
+      font-size: 10px;
+      padding: 10px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    #loveHeart {
+      width: 300px;
+      height: 280px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    #words {
+      width: 90%;
+      font-size: 16px;
+    }
+  
+    .photo {
+      width: 100px;
+      height: 100px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .modal-content-wrapper {
+      flex-direction: column;
+    }
+  }
+
   .caption {
     margin-left: 0;
     margin-top: 10px;
